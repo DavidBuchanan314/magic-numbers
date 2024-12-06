@@ -12,8 +12,6 @@ print(f"{FOUR_HUNDRED_AND_TWENTY = }")  # 420
 print(f"{ONE_THOUSAND_THREE_HUNDRED_AND_TWELVE = }")  # 1312
 ```
 
-If someone can figure out how to make the type hinting work properly please let me know.
-
 ## Installation
 
 ```sh

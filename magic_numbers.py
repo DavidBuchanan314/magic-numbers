@@ -38,13 +38,8 @@ def _text2int(textnum: str, numwords={}) -> int | None:
 
 	return result + current
 
-class MagicNumbers:
-	def __getattribute__(self, name: str) -> int:
-		if name.startswith("_"): # handle dunders
-			return object.__getattribute__(_orig_module, name)
-		val = _text2int(name.lower().replace("_", " "))
-		if val is None: # should raise an import error
-			return object.__getattribute__(_orig_module, name)
-		return val
-
-sys.modules[__name__] = MagicNumbers()
+def __getattr__(name: str) -> int:
+	val = _text2int(name.lower().replace("_", " "))
+	if val is None: # should raise an appropriate AttributeError
+		return object.__getattribute__(_orig_module, name)
+	return val
