@@ -19,7 +19,25 @@ def _text2int(textnum: str, numwords={}) -> int | None:
 			"quintillion", "sextillion", "septillion", "octillion", "nonillion",
 			"decillion", "undecillion", "duodecillion", "tredecillion",
 			"quattuordecillion", "quindecillion", "sexdecillion", "septemdecillion",
-			"octodecillion", "novemdecillion", "vigintillion", # PRs welcome (seriously)
+			"octodecillion", "novemdecillion", "vigintillion", "unvigintillion",
+			"duovigintillion", "tresvigintillion", "quattuorvigintillion", "quinvigintillion",
+			"sesvigintillion", "septemvigintillion", "octovigintillion", "novemvigintillion",
+			"trigintillion", "untrigintillion", "duotrigintillion", "trestrigintillion",
+			"quattuortrigintillion", "quintrigintillion", "sestrigintillion", "septentrigintillion",
+			"octotrigintillion", "noventrigintillion", "quadragintillion", "unquadragintillion",
+			"duoquadragintillion", "tresquadragintillion", "quattuorquadragintillion", "quinquadragintillion",
+			"sesquadragintillion", "septenquadragintillion", "octoquadragintillion", "novenquadragintillion",
+			"quinquagintillion", "unquinquagintillion", "duoquinquagintillion", "trequinquagintillion",
+			"quattuorquinquagintillion", "quinquinquagintillion", "sesquinquagintillion", "septenquinquagintillion",
+			"octoquinquagintillion", "novenquinquagintillion", "sexagintillion", "unsexagintillion", "duosexagintillion",
+			"tresexagintillion", "quattuorsexagintillion", "quinsexagintillion", "sesexagintillion", "septensexagintillion",
+			"octosexagintillion", "novensexagintillion", "septuagintillion", "unseptuagintillion", "duoseptuagintillion",
+			"treseptuagintillion", "quattuorseptuagintillion", "quinseptuagintillion", "seseptuagintillion",
+			"septenseptuagintillion", "octoseptuagintillion", "novenseptuagintillion", "octogintillion", "unoctogintillion",
+			"duooctogintillion", "tresoctogintillion", "quattuoroctogintillion", "quinoctogintillion", "sexoctogintillion",
+			"septemoctogintillion", "octooctogintillion", "novemoctogintillion", "nonagintillion", "unnonagintillion", 
+			"duononagintillion", "trenonagintillion", "quattuornonagintillion", "quinnonagintillion", "senonagintillion", 
+			"septenonagintillion", "octononagintillion", "novenonagintillion", "centillion", # PRs welcome (seriously)
 		]
 		numwords["and"] = (1, 0)
 		for idx, word in enumerate(units):  numwords[word] = (1, idx)
