@@ -85,9 +85,9 @@ def __getattr__(name: str) -> Union[int, float]:
 	if name.startswith('NEGATIVE_') or name.startswith('MINUS_'):
 		is_negative = True
 		if name[0] == 'N':
-			name = name[9:] # remove "NEGATIVE_"
+			name = name.partition('_')[2] # remove "NEGATIVE_"
 		elif name[0] == 'M':
-			name = name[6:] # remove "MINUS_"
+			name = name.partition('_')[2] # remove "MINUS_"
 	# First try to parse as float (if it contains _POINT_)
 	if '_POINT_' in name:
 		val = _parse_float_name(name)
