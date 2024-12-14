@@ -81,13 +81,17 @@ def _parse_float_name(name: str) -> Union[float, None]:
 	return float(f"{int_part}.{decimal_str}")
 
 def __getattr__(name: str) -> Union[int, float]:
+	is_negative = False
+	if name.startswith('NEGATIVE_'):
+		is_negative = True
+		name = name[9:] # remove "NEGATIVE_"
 	# First try to parse as float (if it contains _POINT_)
 	if '_POINT_' in name:
 		val = _parse_float_name(name)
 		if val is not None:
-			return val
+			return val if not is_negative else -val
 	# fall back to integer parsing
 	val = _text2int(name.lower().replace('_', ' '))
 	if val is None: # should raise an appropriate AttributeError
 		return object.__getattribute__(_orig_module, name)
-	return val
+	return val if not is_negative else -val
