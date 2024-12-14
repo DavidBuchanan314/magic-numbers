@@ -1,4 +1,5 @@
 import sys
+from typing import Union
 
 _orig_module = sys.modules[__name__]
 
@@ -56,8 +57,37 @@ def _text2int(textnum: str, numwords={}) -> int | None:
 
 	return result + current
 
-def __getattr__(name: str) -> int:
-	val = _text2int(name.lower().replace("_", " "))
+def _parse_float_name(name: str) -> Union[float, None]:
+	parts = name.split('_POINT_')
+	if len(parts) != 2:
+		return None
+
+	# Parse integer part
+	int_part = _text2int(parts[0].lower().replace('_', ' '))
+	if int_part is None:
+		return None
+
+	# Parse the decimal part
+	decimal_parts = parts[1].split('_')
+	decimal_str = ''
+
+	for part in decimal_parts:
+		val = _text2int(part.lower())
+		if val is None or val > 9: # Each part must be a single digit
+			return None
+		decimal_str += str(val)
+
+	# Combine the parts
+	return float(f"{int_part}.{decimal_str}")
+
+def __getattr__(name: str) -> Union[int, float]:
+	# First try to parse as float (if it contains _POINT_)
+	if '_POINT_' in name:
+		val = _parse_float_name(name)
+		if val is not None:
+			return val
+	# fall back to integer parsing
+	val = _text2int(name.lower().replace('_', ' '))
 	if val is None: # should raise an appropriate AttributeError
 		return object.__getattribute__(_orig_module, name)
 	return val
